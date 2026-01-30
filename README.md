@@ -1,6 +1,6 @@
-[build-status]: https://github.com/avereon/weave/workflows/Avereon%20Weave%20Continuous/badge.svg "Build status"
+[build-status]: https://github.com/acromere/weave/workflows/Acromere%20Weave%20Continuous/badge.svg "Build status"
 
-# Weave [![][build-status]](https://github.com/avereon/weave/actions)
+# Weave [![][build-status]](https://github.com/acromere/weave/actions)
 
 A Java program to apply updates. This program is commonly used with other 
 programs to automate the update process. It has pre-defined tasks that can be 

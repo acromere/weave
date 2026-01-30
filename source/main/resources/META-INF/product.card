@@ -3,7 +3,7 @@
   "artifact" : "${project.artifactId}",
   "version" : "${project.version}",
   "timestamp" : "${project.timestamp}",
-  "iconUri" : "http://www.avereon.com/images/icons/${project.artifactId}.png",
+  "iconUri" : "http://www.acromere.com/images/icons/${project.artifactId}.png",
   "name" : "${project.name}",
   "provider" : "${project.organization.name}",
   "inception" : "${project.inceptionYear}",
@@ -11,16 +11,16 @@
   "description" : "${project.description}",
   "copyrightSummary" : "All rights reserved.",
   "licenseSummary" : "${project.name} comes with ABSOLUTELY NO WARRANTY. This is open software, and you are welcome to redistribute it under certain conditions.",
-  "cardUri" : "http://avereon.com/download/${project.artifactId}/product/card/{0}",
-  "packUri" : "http://avereon.com/download/${project.artifactId}/product/pack/{0}",
-  "mainClass" : "com.avereon.weave.Program",
+  "cardUri" : "http://acromere.com/download/${project.artifactId}/product/card/{0}",
+  "packUri" : "http://acromere.com/download/${project.artifactId}/product/pack/{0}",
+  "mainClass" : "com.acromere.weave.Program",
   "javaVersion" : "11",
   "maintainers" : [ {
     "name" : "Mark Soderquist",
-    "email" : "mark@avereon.com",
+    "email" : "mark@acromere.com",
     "timezone" : null,
-    "organization" : "Avereon",
-    "organizationUrl" : "https://www.avereon.com",
+    "organization" : "Acromere",
+    "organizationUrl" : "https://www.acromere.com",
     "roles" : [ "Architect", "Developer" ]
   } ]
 }

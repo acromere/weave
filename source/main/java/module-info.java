@@ -1,16 +1,18 @@
-module com.avereon.weave {
+import com.acromere.weave.Weave;
+
+module com.acromere.weave {
 
 	// Compile-time only
 	requires static lombok;
 
 	// Both compile-time and run-time
-	requires com.avereon.zevra;
-	requires com.avereon.zerra;
-	requires com.avereon.zenna;
+	requires com.acromere.zevra;
+	requires com.acromere.zerra;
+	requires com.acromere.zenna;
 	requires javafx.controls;
 
-	exports com.avereon.weave;
-	exports com.avereon.weave.icon;
+	exports com.acromere.weave;
+	exports com.acromere.weave.icon;
 
-	provides com.avereon.product.Product with com.avereon.weave.Weave;
+	provides com.acromere.product.Product with Weave;
 }

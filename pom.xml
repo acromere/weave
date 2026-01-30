@@ -5,12 +5,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.avereon.pom</groupId>
+		<groupId>com.acromere.pom</groupId>
 		<artifactId>prd</artifactId>
-		<version>3.6.4</version>
+		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>com.avereon</groupId>
+	<groupId>com.acromere</groupId>
 	<artifactId>weave</artifactId>
 	<version>1.7-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -31,15 +31,15 @@
 
 	<repositories>
 		<repository>
-			<id>avn</id>
-			<url>https://repo.avereon.com/avn</url>
+			<id>acm</id>
+			<url>https://repo.acromere.com/acm</url>
 		</repository>
 	</repositories>
 
 	<pluginRepositories>
 		<pluginRepository>
-			<id>avn</id>
-			<url>https://repo.avereon.com/avn</url>
+			<id>acm</id>
+			<url>https://repo.acromere.com/acm</url>
 		</pluginRepository>
 	</pluginRepositories>
 
@@ -49,10 +49,10 @@
 		<java.version>25</java.version>
 
 		<!-- Runtime dependencies -->
-		<!-- Version numbers updated 18 Feb 2023 -->
+		<!-- Version numbers updated 30 Jan 2026 -->
 		<zenna.version>0.12-SNAPSHOT</zenna.version>
 		<zevra.version>0.12-SNAPSHOT</zevra.version>
-		<openjfx.version>22.0.2</openjfx.version>
+		<openjfx.version>25.0.2</openjfx.version>
 
 		<!-- Plugin versions -->
 		<cameo.version>2.13-SNAPSHOT</cameo.version>
@@ -61,14 +61,14 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>com.avereon</groupId>
+			<groupId>com.acromere</groupId>
 			<artifactId>zevra</artifactId>
 			<version>${zevra.version}</version>
 			<optional>true</optional>
 		</dependency>
 
 		<dependency>
-			<groupId>com.avereon</groupId>
+			<groupId>com.acromere</groupId>
 			<artifactId>zenna</artifactId>
 			<version>${zenna.version}</version>
 			<optional>true</optional>
@@ -80,7 +80,7 @@
 		<plugins>
 
 			<plugin>
-				<groupId>com.avereon</groupId>
+				<groupId>com.acromere</groupId>
 				<artifactId>cameo</artifactId>
 				<version>${cameo.version}</version>
 				<executions>
@@ -93,7 +93,7 @@
 						<configuration>
 							<images>
 								<image>
-									<class>com.avereon.weave.icon.WeaveIcon</class>
+									<class>com.acromere.weave.icon.WeaveIcon</class>
 									<target>${images-folder}/weave.png</target>
 									<theme>light</theme>
 								</image>
@@ -104,31 +104,31 @@
 									<theme>light</theme>
 									<images>
 										<image>
-											<class>com.avereon.weave.icon.WeaveIcon</class>
+											<class>com.acromere.weave.icon.WeaveIcon</class>
 											<size>16</size>
 										</image>
 										<image>
-											<class>com.avereon.weave.icon.WeaveIcon</class>
+											<class>com.acromere.weave.icon.WeaveIcon</class>
 											<size>24</size>
 										</image>
 										<image>
-											<class>com.avereon.weave.icon.WeaveIcon</class>
+											<class>com.acromere.weave.icon.WeaveIcon</class>
 											<size>32</size>
 										</image>
 										<image>
-											<class>com.avereon.weave.icon.WeaveIcon</class>
+											<class>com.acromere.weave.icon.WeaveIcon</class>
 											<size>48</size>
 										</image>
 										<image>
-											<class>com.avereon.weave.icon.WeaveIcon</class>
+											<class>com.acromere.weave.icon.WeaveIcon</class>
 											<size>64</size>
 										</image>
 										<image>
-											<class>com.avereon.weave.icon.WeaveIcon</class>
+											<class>com.acromere.weave.icon.WeaveIcon</class>
 											<size>96</size>
 										</image>
 										<image>
-											<class>com.avereon.weave.icon.WeaveIcon</class>
+											<class>com.acromere.weave.icon.WeaveIcon</class>
 											<size>128</size>
 										</image>
 									</images>
@@ -144,7 +144,7 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<configuration>
 					<links>
-						<link>https://www.avereon.com/product/zevra/docs/api</link>
+						<link>https://www.acromere.com/product/zevra/docs/api</link>
 					</links>
 					<failOnError>false</failOnError>
 				</configuration>
