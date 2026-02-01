@@ -1,4 +1,4 @@
-[build-status]: https://github.com/acromere/weave/workflows/Acromere%20Weave%20Continuous/badge.svg "Build status"
+[build-status]: https://github.com/acromere/weave/actions/workflows/ci.yml/badge.svg "Build status"
 
 # Weave [![][build-status]](https://github.com/acromere/weave/actions)
 
