@@ -95,7 +95,16 @@
 								<image>
 									<class>com.acromere.weave.icon.WeaveIcon</class>
 									<target>${images-folder}/weave.png</target>
+								</image>
+								<image>
+									<class>com.acromere.weave.icon.WeaveIcon</class>
+									<target>${images-folder}/weave-light.png</target>
 									<theme>light</theme>
+								</image>
+								<image>
+									<class>com.acromere.weave.icon.WeaveIcon</class>
+									<target>${images-folder}/weave-dark.png</target>
+									<theme>dark</theme>
 								</image>
 							</images>
 							<icons>
