@@ -1,4 +1,4 @@
-name: Acromere Weave CI
+name: Weave CI
 
 on:
   push:
