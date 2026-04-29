@@ -39,7 +39,7 @@ public class DeleteTask extends Task {
 
 	@Override
 	public TaskResult execute() throws Exception {
-		setMessage( "Delete " + target );
+		setMessage( "Remove " + target );
 		FileUtil.delete( target );
 		incrementProgress();
 		return new TaskResult( this, TaskStatus.SUCCESS, target.toString() );
