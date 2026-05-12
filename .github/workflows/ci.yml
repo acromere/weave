@@ -30,7 +30,7 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 5
     steps:
       - name: Fetch sources
         uses: actions/checkout@v6
@@ -73,13 +73,63 @@ jobs:
         run: |
           mvn ${{env.MAVEN_PARMS}} test
 
+      - name: Upload Artifacts for Next Steps
+        uses: actions/upload-artifact@v6
+        with:
+          name: build
+          path: target
+
+  publish:
+    name: publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Fetch sources
+        uses: actions/checkout@v6
+
+      - name: Fetch CI/CD resources
+        uses: actions/checkout@v6
+        with:
+          repository: acromere/canoe
+          path: .github
+
+      - name: Configuration
+        shell: bash
+        run: |
+          source .github/config.sh
+
+      # Required to render the product icon
+      - name: Set up Virtual Display
+        run: |
+          Xvfb ${{env.DISPLAY}} ${{env.XVFB_PARMS}} &
+
+      - name: Set up Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: ${{env.JAVA_DISTRO}}
+          java-version: ${{env.JAVA_VERSION}}
+
+      - name: Maven Repository Cache
+        uses: actions/cache@v5
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v7
+        with:
+          name: build
+          path: target
+
+      #      - name: Build Assemblies
+      #        run: |
+      #          mvn ${{env.MAVEN_PARMS}} verify -P testui,platform-agnostic-assemblies
+
       - name: Deploy Artifacts
         run: |
           mvn ${{env.MAVEN_PARMS}} deploy -Dmaven.test.skip=true
-
-      - name: Trigger Dependent Builds
-        run: |
-          curl -XPOST -u "${{secrets.ACM_CI_USERNAME}}:${{secrets.ACM_CI_PASSWORD}}" -H "Accept: application/vnd.github.v3+json" -H "Content-Type: application/json" https://api.github.com/repos/acromere/xenon/actions/workflows/ci.yml/dispatches --data '{"ref": "main"}'
 
       - name: Deploy JavaDoc
         run: |
@@ -99,19 +149,29 @@ jobs:
           scp -B target/main/images/${ACM_PRODUCT}-light.png ${{env.ACM_XENON_REPO_USERNAME}}@acromere.com:${PRODUCT_DEPLOY_PATH}/product-light.png 2>&1
           if [ $? -ne 0 ]; then exit 1; fi
           scp -B target/main/images/${ACM_PRODUCT}-dark.png ${{env.ACM_XENON_REPO_USERNAME}}@acromere.com:${PRODUCT_DEPLOY_PATH}/product-dark.png 2>&1
+      #
+      #      - name: Deploy Product Pack
+      #        run: |
+      #          scp -B target/*product.jar ${{env.ACM_XENON_REPO_USERNAME}}@acromere.com:${PRODUCT_DEPLOY_PATH} 2>&1
+      #
+      #      - name: Deploy Product Icon
+      #        run: |
+      #          scp -B target/main/images/*product.png ${{env.ACM_XENON_REPO_USERNAME}}@acromere.com:${PRODUCT_DEPLOY_PATH} 2>&1
+      #
+      #      - name: Deploy Product Card
+      #        run: |
+      #          scp -B target/main/java/META-INF/*.card ${{env.ACM_XENON_REPO_USERNAME}}@acromere.com:${PRODUCT_DEPLOY_PATH} 2>&1
 
-#      - name: Build Assemblies
-#        run: |
-#          mvn ${{env.MAVEN_PARMS}} verify -P testui,platform-agnostic-assemblies
-#
-#      - name: Deploy Product Pack
-#        run: |
-#          scp -B target/*product.jar ${{env.ACM_XENON_REPO_USERNAME}}@acromere.com:${PRODUCT_DEPLOY_PATH} 2>&1
-#
-#      - name: Deploy Product Icon
-#        run: |
-#          scp -B target/main/images/*product.png ${{env.ACM_XENON_REPO_USERNAME}}@acromere.com:${PRODUCT_DEPLOY_PATH} 2>&1
-#
-#      - name: Deploy Product Card
-#        run: |
-#          scp -B target/main/java/META-INF/*.card ${{env.ACM_XENON_REPO_USERNAME}}@acromere.com:${PRODUCT_DEPLOY_PATH} 2>&1
+  trigger:
+    needs: publish
+    name: Trigger Dependent Builds
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: github.ref == 'refs/heads/main' && github.actor != 'dependabot[bot]'
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v4
+        with:
+          repository: acromere/xenon
+          event-type: dependency-trigger
+          token: ${{ secrets.ACM_CI_TOKEN }}
