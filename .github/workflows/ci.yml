@@ -83,9 +83,10 @@ jobs:
 
   publish:
     needs: build
-    name: publish
+    name: Publish
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    if: github.ref == 'refs/heads/main' && github.actor != 'dependabot[bot]'
     steps:
       - name: Fetch sources
         uses: actions/checkout@v6
