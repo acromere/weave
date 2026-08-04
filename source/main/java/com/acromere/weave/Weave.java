@@ -8,7 +8,6 @@ import com.acromere.product.Rb;
 import com.acromere.settings.MapSettings;
 import com.acromere.settings.Settings;
 import com.acromere.util.*;
-import com.acromere.weave.task.*;
 import com.acromere.zenna.icon.UpdateIcon;
 import com.acromere.zerra.image.Images;
 import com.acromere.zerra.javafx.Fx;
@@ -347,7 +346,7 @@ public class Weave extends Application implements Product {
 		} );
 
 		try {
-			Fx.waitForWithExceptions( 1000 );
+			Fx.waitFor( 1000 );
 		} catch( TimeoutException exception ) {
 			log.atWarning().log( "Timeout waiting for progress dialog" );
 		} catch( InterruptedException exception ) {
