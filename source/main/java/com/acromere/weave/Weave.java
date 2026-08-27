@@ -411,10 +411,11 @@ public class Weave extends Application implements Product {
 		// How long to sit around, without receiving any tasks, before giving up
 		int hungTimeout = 60;
 
-		// If the elevated process gives up waiting for its next task too soon
+		// If the elevated process gives up waiting for its next task too soon,
 		// it exits...closing the socket and causing a broken pipe
-		while( !TextUtil.isEmpty( line = buffer.readLine( hungTimeout, TimeUnit.SECONDS ) ) ) {
+		while( (line = buffer.readLine( hungTimeout, TimeUnit.SECONDS )) != null ) {
 			line = line.trim();
+			if( TextUtil.isEmpty( line ) ) continue;
 			boolean rollback = false;
 			if( line.startsWith( "-" ) ) {
 				rollback = true;
