@@ -204,7 +204,7 @@ public class Weave extends Application implements Product {
 
 		if( inputSource != null ) {
 			executeThread = new Thread( new Runner() );
-			executeThread.setName( "Zenna " + (isElevated() ? "elevated" : "execute") + " thread" );
+			executeThread.setName( "Weave " + (isElevated() ? "elevated" : "execute") + " thread" );
 			executeThread.start();
 		}
 	}
