@@ -53,8 +53,8 @@ public class ElevatedProcessTest {
 		String secret = UUID.randomUUID().toString();
 		int port = 4324;
 
-		// The interface to an "elevated" process is the socket
-		// so to use it a server socket needs to be started
+		// The interface to an "elevated" process is the socket,
+		// so to use it, a server socket needs to be started
 		server = new ServerSocket();
 		server.setReuseAddress( true );
 		server.bind( new InetSocketAddress( InetAddress.getLoopbackAddress(), port ) );

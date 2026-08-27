@@ -6,12 +6,14 @@ import java.util.concurrent.TimeUnit;
 
 public class ProgressDialogCheck {
 
-	public static void main( String[] commands ) {
+	static void main() {
+		// Build an update script
 		StringBuilder builder = new StringBuilder();
 		for( int index = 0; index < 10; index++ ) {
 			builder.append( "pause 200 \"Task " ).append( index ).append( "\"" ).append( "\n" );
 		}
 
+		// Execute the update script
 		try {
 			Weave program = new Weave();
 			program.start( WeaveFlag.TITLE, "Program Update Check", LogFlag.LOG_LEVEL, "debug", InternalFlag.STRING );
