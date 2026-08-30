@@ -48,7 +48,7 @@ public class ElevatedProcessTest {
 		// NOTE The term "elevated" is in quotes, meaning that the test is emulating an elevated process.
 
 		// Convince the OperatingSystem class that the process is "elevated"
-		System.setProperty( OperatingSystem.PROCESS_PRIVILEGE_KEY, OperatingSystem.ELEVATED_PRIVILEGE_VALUE );
+		OperatingSystem.setElevatedProcess( true );
 
 		String secret = UUID.randomUUID().toString();
 		int port = 4324;
@@ -80,7 +80,7 @@ public class ElevatedProcessTest {
 		elevated.waitForStop( START_STOP_TIMEOUT, TimeUnit.MILLISECONDS );
 		assertThat( elevated.getStatus() ).isEqualTo( Weave.Status.STOPPED );
 		server.close();
-		System.setProperty( OperatingSystem.PROCESS_PRIVILEGE_KEY, OperatingSystem.NORMAL_PRIVILEGE_VALUE );
+		OperatingSystem.setElevatedProcess( false );
 	}
 
 	@Test
